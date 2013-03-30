@@ -13,6 +13,14 @@ function getCountyData() {
             };
         })
         .entries(data);
+        var finalData = {};
+        for(var i in countyData){
+            finalData[countyData[i].key] = {};
+            finalData[countyData[i].key].AVGDIST = countyData[i].values.AVGDIST;
+            finalData[countyData[i].key].MAXDIST = countyData[i].values.MAXDIST;
+            finalData[countyData[i].key].MINDIST = countyData[i].values.MINDIST;
+            finalData[countyData[i].key].COUNT = countyData[i].values.COUNT;
+        }
 
         maFips.forEach( function(fips, index, array) {
             var eid = "#" + fips;
