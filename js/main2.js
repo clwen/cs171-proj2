@@ -1,16 +1,20 @@
-var ids = new Array("");
+var maFips = _.range(25001, 25028, 2);
 
 $(document).ready( function() {
-    var path = $("#25001")[0];
-    console.log(path.getBBox());
+    maFips.forEach( function(fips, index, array) {
+        var eid = "#" + fips;
+        console.log(eid);
 
-    var path = $("#25003")[0];
-    console.log(path.getBBox());
+        var path = $(eid)[0];
+        var bbox = path.getBBox();
+        console.log(bbox.x, bbox.y);
 
-    d3.select("svg").append("circle")
-        .attr("cx", 12326)
-        .attr("cy", 3363)
-        .attr("r", 300)
-        .attr("stroke", "black")
-        .attr("fill", "red")
+        d3.select("svg").append("circle")
+            .attr("cx", bbox.x + bbox.width/2)
+            .attr("cy", bbox.y + bbox.height/2)
+            .attr("r", 300)
+            .attr("stroke", "black")
+            .attr("stroke-width", "10")
+            .attr("fill", "red")
+    });
 });
