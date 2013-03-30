@@ -5,7 +5,7 @@ function getCountyData(){
         .rollup(function(d){
             return {
                 COUNT:d3.sum(d, function(g){return g.COUNT;}),
-                AVGDIST:d3.mean(d, function(g){return g.AVGDIST;}),
+                AVGDIST:d3.mean(d, function(g){return parseFloat(g.AVGDIST);}),
                 MINDIST:d3.min(d, function(g){return g.AVGDIST;}),
                 MAXDIST:d3.max(d, function(g){return g.AVGDIST;})
             };
