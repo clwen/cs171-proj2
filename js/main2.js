@@ -13,26 +13,23 @@ function getCountyData() {
             };
         })
         .entries(data);
-        console.log(countyData);
-        cData = countyData;
+
+        maFips.forEach( function(fips, index, array) {
+            var eid = "#" + fips;
+            var path = $(eid)[0];
+            var bbox = path.getBBox();
+
+            d3.select("svg").append("circle")
+                .attr("cx", bbox.x + bbox.width/2)
+                .attr("cy", bbox.y + bbox.height/2)
+                .attr("r", 300)
+                .attr("stroke", "black")
+                .attr("stroke-width", "10")
+                .attr("fill", "red")
+        });
     });
 }
 
 $(document).ready( function() {
     getCountyData();
-    console.log(cData);
-
-    maFips.forEach( function(fips, index, array) {
-        var eid = "#" + fips;
-        var path = $(eid)[0];
-        var bbox = path.getBBox();
-
-        d3.select("svg").append("circle")
-            .attr("cx", bbox.x + bbox.width/2)
-            .attr("cy", bbox.y + bbox.height/2)
-            .attr("r", 300)
-            .attr("stroke", "black")
-            .attr("stroke-width", "10")
-            .attr("fill", "red")
-    });
 });
