@@ -27,13 +27,17 @@ function getCountyData() {
             var path = $(eid)[0];
             var bbox = path.getBBox();
 
-            d3.select("svg").append("circle")
-                .attr("cx", bbox.x + bbox.width/2)
-                .attr("cy", bbox.y + bbox.height/2)
-                .attr("r", 300)
-                .attr("stroke", "black")
-                .attr("stroke-width", "10")
-                .attr("fill", "red")
+            if (finalData[fips] != undefined) {
+                var count = finalData[fips].COUNT;
+
+                d3.select("svg").append("circle")
+                    .attr("cx", bbox.x + bbox.width/2)
+                    .attr("cy", bbox.y + bbox.height/2)
+                    .attr("r", Math.sqrt(count) * 10)
+                    .attr("stroke", "black")
+                    .attr("stroke-width", "10")
+                    .attr("fill", "red")
+            }
         });
     });
 }
