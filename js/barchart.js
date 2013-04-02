@@ -66,12 +66,7 @@ function renderBarchart(category, datatype, county){
         if(county!="ALL"){
             command += ".key(function(d){return d.COUNTY;})";
         }
-        // command += ".key(function(d){return d."+category+";})"+
-        //     ".rollup(function(d){"+
-        //         "return d3.sum(d, function(g){return g.COUNT;});"+
-        //     "})"+
-        //     ".entries(data);";
-        command += ".key(function(d){return d."+category+";})"+
+        command += ".key(function(d){return d.COMMUTE_TYPE;})"+
         ".rollup(function(d){"+
             "return {"+
                 "COUNT:d3.sum(d, function(g){return g.COUNT;}),"+
@@ -80,6 +75,7 @@ function renderBarchart(category, datatype, county){
         "})"+
         ".entries(data);";
         var processedData = eval(command);
+        console.log(processedData);
         var nestedData = [];
         if(county=="ALL"){
             nestedData = processedData;
