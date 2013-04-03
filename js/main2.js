@@ -2,14 +2,14 @@ var maFips = _.range(25001, 25028, 2);
 var cData = 0;
 
 function getCountyData() {
-    d3.csv("http://localhost:8000/mit-commuter-data.csv", function(data) {
+    d3.csv("data/mit-commuter-data.csv", function(data) {
         var countyData = d3.nest().key(function(d){return d.COUNTY;})
         .rollup(function(d){
             return {
                 COUNT:d3.sum(d, function(g){return parseInt(g.COUNT);}),
-                AVGDIST:d3.mean(d, function(g){return parseFloat(g.AVGDIST);}),
-                MINDIST:d3.min(d, function(g){return parseFloat(g.AVGDIST);}),
-                MAXDIST:d3.max(d, function(g){return parseFloat(g.AVGDIST);})
+                AVGDIST:d3.mean(d, function(g){return parseFloat(g.DIST);}),
+                MINDIST:d3.min(d, function(g){return parseFloat(g.DIST);}),
+                MAXDIST:d3.max(d, function(g){return parseFloat(g.DIST);})
             };
         })
         .entries(data);
@@ -21,6 +21,7 @@ function getCountyData() {
             finalData[countyData[i].key].MINDIST = countyData[i].values.MINDIST;
             finalData[countyData[i].key].COUNT = countyData[i].values.COUNT;
         }
+        console.log(finalData);
 
         maFips.forEach( function(fips, index, array) {
             var eid = "#" + fips;
