@@ -1,7 +1,7 @@
 $(document).ready(function() {
     var margin = {top: 20, right: 20, bottom: 30, left: 50},
-        width = 960 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+        width = 480 - margin.left - margin.right,
+        height = 250 - margin.top - margin.bottom;
 
     var parseDate = d3.time.format("%y-%b-%d").parse,
         formatPercent = d3.format(".0%");
@@ -31,7 +31,7 @@ $(document).ready(function() {
     var stack = d3.layout.stack()
         .values(function(d) { return d.values; });
 
-    var svg = d3.select("body").append("svg")
+    var svg = d3.select("#area-chart").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
