@@ -1,5 +1,6 @@
 var maFips = _.range(25001, 25028, 2);
 var cData = 0;
+var fips = 0;
 
 function getCountyData() {
     d3.csv("data/mit-commuter-data.csv", function(data) {
@@ -39,7 +40,12 @@ function getCountyData() {
                     .attr("fill", "red")
             }
         });
-    });
+
+        $(".county").click( function() {
+            fips = $(this).attr("id");
+            console.log(fips);
+        });
+    }); // end of d3.csv
 }
 
 $(document).ready( function() {
