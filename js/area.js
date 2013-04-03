@@ -213,8 +213,9 @@ $(document).ready(function() {
             .attr("class", "dist-hl")
             .style("opacity", 0);
 
-        $("input:radio[name=county]").click( function() {
-            var fips = $("input:radio[name=county]:checked").val();
+        $(".county").click( function() {
+            fips = $(this).attr("id");
+            console.log(fips);
             var max_dist = countyData[fips].MAXDIST;
             if (max_dist > 80) {max_dist = 80;}
             var min_dist = countyData[fips].MINDIST;
