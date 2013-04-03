@@ -70,6 +70,48 @@
         <path id="25027" title="Worcester" d="M 1949,-3479 l 241,8 21,94 185,185 36,41 36,-11 16,56 51,45 11,80 -18,379 113,-46 414,12 158,4 -1,-86 908,357 -87,662 -24,242 354,68 -27,-85 21,-36 4,-55 101,-132 5,-6 16,-5 5,0 82,65 21,15 107,20 16,-11 101,-66 338,78 64,252 20,10 -116,213 -136,284 139,89 -123,607 -214,57 -158,108 200,114 -228,184 41,34 -30,66 -26,41 -132,97 72,85 108,50 1,65 57,111 103,110 117,-97 173,-82 153,-16 123,-21 67,29 178,-31 17,106 -10,116 -155,415 -5,55 1,41 -16,10 -56,-45 -67,16 -81,0 -67,41 -36,-20 -72,-35 -61,1 -214,92 -129,471 165,246 92,9 -5,20 134,9 5,101 138,-82 261,9 41,-31 48,277 158,9 1,96 2,277 -188,158 6,40 -21,26 32,90 31,25 -25,71 7,868 -318,13 -184,8 -905,40 -1075,43 -10,-166 -717,-15 -480,-10 -216,-10 -55,-4 -221,-14 -650,5 -173,-9 -277,-13 10,-1459 -531,95 -16,-86 -406,-194 -118,-54 9,-107 -15,-35 35,-101 157,-208 172,-233 31,-41 56,20 -11,-96 -41,-4 -11,-152 41,0 9,-141 66,-72 5,-25 -62,-35 -46,1 0,-51 36,-35 -11,-36 15,-55 0,-10 -61,10 -348,73 -5,-20 -107,36 -43,-297 26,-6 -11,-80 -26,5 -21,-177 -52,1 -91,41 -31,35 -10,11 -25,0 -41,10 19,-101 5,-66 -5,-50 -6,-121 4,-61 -5,-45 0,-61 -16,-75 15,-71 30,-76 15,-61 15,-40 30,-61 35,-30 31,-46 35,-46 10,-15 11,-15 35,-46 -69,-428 386,-377 -196,-215 -16,-116 -49,-298 -5,-81 20,-5 67,5 41,20 -43,-278 31,10 25,-10 15,-41 41,-10 -11,-70 102,-21 31,-6 87,-10 4,-76 -20,0 5,-20 -21,-15 10,-20 21,4 15,-30 5,-45 -26,-56 30,-5 -37,-267 -102,10 -6,-85 -117,16 -11,-81 -113,11 -90,-541 1421,53 z" />
         </g>
         </svg>
+
+        <div class="row-fluid">
+          <div class="span6">
+            <div class="row-fluid">
+              <div class="span3">
+                <h4>Options</h4>
+                <!--Sidebar content-->
+                <label><input type="checkbox"> Sort values</label>
+                <form onclick="renderBarchart($('input[name=category]:checked').val(), $('input[name=datatype]:checked').val(), $('#county option:selected').val());">
+                  <h5>Data Type</h5>
+                  <label class="radio">
+                    <input type="radio" name="datatype" id="percent" value="PERCENT">
+                    Percentages
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="datatype" id="people" value="COUNT" checked>
+                    Total Number of People
+                  </label>
+                  <h5>Categories</h5>
+                  <label class="radio">
+                    <input type="radio" name="category" id="area" value="AREA" checked>
+                    Area
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="category" id="affiliation" value="AFFILIATION">
+                    Affiliation
+                  </label>
+                  <h5>Geography</h5>
+                  <select id="county">
+                    <option value="ALL" selected>ALL</option>
+                    <option value="25017">Middlesex</option>
+                    <option value="25021">Norfolk</option>
+                    <option value="25009">Essex</option>
+                  </select>
+                </form>
+              </div>
+              <div class="span9">
+              </div>
+            </div>
+          </div>
+          <div class="span6">Area chart</div>
+        </div>
       </div>
     </div>
   </body>
