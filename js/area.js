@@ -182,7 +182,7 @@ $(document).ready(function() {
             .call(yAxis);
 
         var div = d3.select("body").append("div")
-            .attr("class", "tooltip")
+            .attr("class", "area-tooltip")
             .style("opacity", 0);
 
         $(".area").mouseover(function() {
