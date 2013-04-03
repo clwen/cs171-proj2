@@ -3,7 +3,7 @@ var cData = 0;
 
 function getCountyData() {
     d3.csv("data/mit-commuter-data.csv", function(data) {
-        var countyData = d3.nest().key(function(d){return d.COUNTY;})
+        var countyDataPre = d3.nest().key(function(d){return d.COUNTY;})
         .rollup(function(d){
             return {
                 COUNT:d3.sum(d, function(g){return parseInt(g.COUNT);}),
@@ -13,13 +13,13 @@ function getCountyData() {
             };
         })
         .entries(data);
-        var finalData = {};
-        for(var i in countyData){
-            finalData[countyData[i].key] = {};
-            finalData[countyData[i].key].AVGDIST = countyData[i].values.AVGDIST;
-            finalData[countyData[i].key].MAXDIST = countyData[i].values.MAXDIST;
-            finalData[countyData[i].key].MINDIST = countyData[i].values.MINDIST;
-            finalData[countyData[i].key].COUNT = countyData[i].values.COUNT;
+        var countyData = {};
+        for(var i in countyDataPre){
+            countyData[countyDataPre[i].key] = {};
+            countyData[countyDataPre[i].key].AVGDIST = countyDataPre[i].values.AVGDIST;
+            countyData[countyDataPre[i].key].MAXDIST = countyDataPre[i].values.MAXDIST;
+            countyData[countyDataPre[i].key].MINDIST = countyDataPre[i].values.MINDIST;
+            countyData[countyDataPre[i].key].COUNT = countyDataPre[i].values.COUNT;
         }
 
         maFips.forEach( function(fips, index, array) {
@@ -27,8 +27,8 @@ function getCountyData() {
             var path = $(eid)[0];
             var bbox = path.getBBox();
 
-            if (finalData[fips] != undefined) {
-                var count = finalData[fips].COUNT;
+            if (countyData[fips] != undefined) {
+                var count = countyData[fips].COUNT;
 
                 d3.select("svg").append("circle")
                     .attr("cx", bbox.x + bbox.width/2)
