@@ -66,16 +66,22 @@ function renderBarchart(category, datatype, county){
         if(county!="ALL"){
             command += ".key(function(d){return d.COUNTY;})";
         }
-        command += ".key(function(d){return d.COMMUTE_TYPE;})"+
+        // command += ".key(function(d){return d."+category+";})"+
+        //     ".rollup(function(d){"+
+        //         "return d3.sum(d, function(g){return g.COUNT;});"+
+        //     "})"+
+        //     ".entries(data);";
+        command += ".key(function(d){return d."+category+";})"+
         ".rollup(function(d){"+
             "return {"+
                 "COUNT:d3.sum(d, function(g){return g.COUNT;}),"+
-                "AVGDIST:d3.mean(d, function(g){return g.AVGDIST;})"+
+                "AVGDIST:d3.mean(d, function(g){return g.DIST;})"+
             "};"+
         "})"+
         ".entries(data);";
         var processedData = eval(command);
-        console.log(processedData);
+        var commuterModes = d3.nest()
+
         var nestedData = [];
         if(county=="ALL"){
             nestedData = processedData;
