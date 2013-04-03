@@ -66,11 +66,6 @@ function renderBarchart(category, datatype, county){
         if(county!="ALL"){
             command += ".key(function(d){return d.COUNTY;})";
         }
-        // command += ".key(function(d){return d."+category+";})"+
-        //     ".rollup(function(d){"+
-        //         "return d3.sum(d, function(g){return g.COUNT;});"+
-        //     "})"+
-        //     ".entries(data);";
         command += ".key(function(d){return d."+category+";})"+
         ".rollup(function(d){"+
             "return {"+
@@ -80,11 +75,22 @@ function renderBarchart(category, datatype, county){
         "})"+
         ".entries(data);";
         var processedData = eval(command);
-        var commuterModes = d3.nest()
+        command = "d3.nest()";
+        if(county!="ALL"){
+            command += ".key(function(d){return d.COUNTY;})";
+        }
+        command += ".key(function(d){return d."+category+";}).key(function(d){return d.COMMUTE_TYPE;})" +
+        ".rollup(function(d){"+
+            "return d3.sum(d, function(g){return g.COUNT;});"+
+        "})"+
+        ".map(data, d3.map);";
+        var commuterData = eval(command);
+        var commuterModes;
 
         var nestedData = [];
         if(county=="ALL"){
             nestedData = processedData;
+            commuterModes = commuterData;
         }
         else{
             for(var i in processedData){
@@ -92,15 +98,34 @@ function renderBarchart(category, datatype, county){
                     nestedData = processedData[i].values;
                 }
             }
+            commuterModes = commuterData.get(county);
         }
-        //console.log(nestedData);
+
+        // console.log(commuterModes);
+        commuterModes.forEach(function(e){
+            var els = this.get(e);
+            console.log(els);
+            for(var i in els){
+                if(i.indexOf("_T") !== -1){ 
+                    if(els.has("T")){
+                        els.set("T", els.get("T") + els[i]);
+                    }
+                    else{
+                        els.set("T", els[i]);
+                    }
+                    els.remove(i);
+                }
+            }
+        });
+        console.log(commuterModes);
+
         var yvals = "d.values";
 
         var total = 0;
         for(var i in nestedData){
             total += nestedData[i].values.COUNT;
         }
-        //console.log(total);
+
         for (var i in nestedData){
             nestedData[i].percent = nestedData[i].values.COUNT/total;
             nestedData[i].AVGDIST = nestedData[i].values.AVGDIST;
@@ -139,7 +164,9 @@ function renderBarchart(category, datatype, county){
           .attr("width", x.rangeBand())
           .attr("y", function(d) { return y(eval(yvals)); })
           .attr("height", function(d) { return height - y(eval(yvals)); })
-            .attr("title", function(d) {return d.key + " : " + eval(yvals) + "<br/>" + "Average Distance to Campus: " + Math.floor(d.AVGDIST) + " km";}); 
+            .attr("title", function(d) {
+                return d.key + " : " + eval(yvals) + "<br/>" + "Average Distance to Campus: " + Math.floor(d.AVGDIST) + " km"//;});
+                + JSON.stringify(commuterModes.get(d.key).entries());}); 
             // to allow for information to be shown on mouseover - tooltip!
 
       d3.select("input").on("change", change);

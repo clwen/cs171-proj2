@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CS.171 Project 2</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap -->
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/underscore-min.js"></script>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script type="text/javascript" src="js/barchart.js"></script>
+        <!-- TOOLTIP -->
+
+    </head>
+    <body>
+        <div class="navbar navbar-fixed-top">
+          <div class="navbar-inner">
+            <div class="container-fluid">
+              <a class="brand" href="#">MIT Commuter Common</a>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid">
+          <div class="row-fluid">
+            <div class="span3">
+                <h4>Options</h4>
+              <!--Sidebar content-->
+                <label><input type="checkbox"> Sort values</label>
+                <form onclick="renderBarchart($('input[name=category]:checked').val(), $('input[name=datatype]:checked').val(), $('#county option:selected').val());">
+                    <h5>Data Type</h5>
+                    <label class="radio">
+                      <input type="radio" name="datatype" id="percent" value="PERCENT">
+                      Percentages
+                    </label>
+                    <label class="radio">
+                      <input type="radio" name="datatype" id="people" value="COUNT" checked>
+                      Total Number of People
+                    </label>
+                    <h5>Categories</h5>
+                    <label class="radio">
+                      <input type="radio" name="category" id="area" value="AREA" checked>
+                      Area
+                    </label>
+                    <label class="radio">
+                      <input type="radio" name="category" id="affiliation" value="AFFILIATION">
+                      Affiliation
+                    </label>
+                    <h5>Geography</h5>
+                    <select id="county">
+                    <option value="ALL" selected>ALL</option>
+                    <option value="25017">Middlesex</option>
+                    <option value="25021">Norfolk</option>
+                    <option value="25009">Essex</option>
+                    </select>
+                </form>
+            </div>
+            <div class="span9">
+              <!--Body content-->
+               <div id = "tooltip" class = "invisible"></div>
+               <div id = "chartarea"></div>
+            </div>
+            <div class="span12"> This visualization shows the MIT community grouped by geography, area, or affiliation. In terms of interactivity, the user
+                is shown additional details per demographic bucket on mouseover, via a minimalist tooltip - this way, the interactivity does not
+                distract from the visualization and augments the user experience by providing additional detail as needed.
+                The visualization also allows the user to view different slices of the data by academic area or affiliation, and by toggling 
+                between population count and percentage. The visualization also allows interactive sorting of the buckets by their population data- 
+                by default they are sorted alphabetically, since the groups are not ordered. The interactive sorting allows the user to quickly
+                rank and order the buckets visually. The visualization is currently using length to encode 
+                the demographic data - since is will become a component of Project 2, the bars may also eventually be differentiated 
+                visually by color, to connect and group relevant data across other parts of the larger visualization. Since this is an initial 
+                example of a piece of the finalized project visualization, the user is currently limited to a few counties as an example. Also,
+                in the final project a key will be provided for the area and affiliation codes.</div>
+          </div>
+        </div>
+    </body>
+</html>
+
