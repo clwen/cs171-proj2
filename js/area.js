@@ -235,7 +235,9 @@ $(document).ready(function() {
                 .attr("width", w)
                 .attr("height", h)
                 .style("fill", "#ff9")
-                .style("opacity", "0.3")
+                .style("opacity", "0.3");
+
+                renderBarchart($('input[name=category]:checked').val(), $('input[name=datatype]:checked').val(), fips);
         });
     }); // end of d3.csv
 }); // end of document ready

@@ -81,7 +81,7 @@
                 <h4>Options</h4>
                 <!--Sidebar content-->
                 <label><input type="checkbox"> Sort values</label>
-                <form onclick="renderBarchart($('input[name=category]:checked').val(), $('input[name=datatype]:checked').val(), $('#county option:selected').val());">
+                <form onclick="renderBarchart($('input[name=category]:checked').val(), $('input[name=datatype]:checked').val(), fips);">
                   <h5>Data Type</h5>
                   <label class="radio">
                     <input type="radio" name="datatype" id="percent" value="PERCENT">
@@ -100,13 +100,6 @@
                     <input type="radio" name="category" id="affiliation" value="AFFILIATION">
                     Affiliation
                   </label>
-                  <h5>Geography</h5>
-                  <select id="county">
-                    <option value="ALL" selected>ALL</option>
-                    <option value="25017">Middlesex</option>
-                    <option value="25021">Norfolk</option>
-                    <option value="25009">Essex</option>
-                  </select>
                 </form>
               </div>
               <div class="span9">
