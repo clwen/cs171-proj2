@@ -20,6 +20,7 @@ function showTT(){
     tt.style.top  = y + "px";
     tt.style.fontSize = "9pt";
     tt.style.zIndex = "3";
+    setTimeout("hideTT();", 3000);
 }
 function hideTT(){
     document.getElementById('tooltip').className="invisible";
@@ -57,6 +58,9 @@ function renderBarchart(category, datatype, county){
     }
 
     var svg = d3.select("#chartarea").append("svg").attr("id", "barchart")
+    // .attr("width", "100%")
+    // .attr("height", "100%")
+    // .attr("viewBox", "0 0 800 0");
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
       .append("g")
@@ -101,10 +105,9 @@ function renderBarchart(category, datatype, county){
             commuterModes = commuterData.get(county);
         }
 
-        // console.log(commuterModes);
+        console.log(commuterModes);
         commuterModes.forEach(function(e){
             var els = this.get(e);
-            console.log(els);
             for(var i in els){
                 if(i.indexOf("_T") !== -1){ 
                     if(els.has("T")){
@@ -113,11 +116,14 @@ function renderBarchart(category, datatype, county){
                     else{
                         els.set("T", els[i]);
                     }
-                    els.remove(i);
+                    delete els[i];
+                }
+                if(i.indexOf("UNK") !== -1){ 
+                    delete els[i];
                 }
             }
         });
-        console.log(commuterModes);
+        //console.log(commuterModes);
 
         var yvals = "d.values";
 
@@ -165,8 +171,14 @@ function renderBarchart(category, datatype, county){
           .attr("y", function(d) { return y(eval(yvals)); })
           .attr("height", function(d) { return height - y(eval(yvals)); })
             .attr("title", function(d) {
-                return d.key + " : " + eval(yvals) + "<br/>" + "Average Distance to Campus: " + Math.floor(d.AVGDIST) + " km"//;});
-                + JSON.stringify(commuterModes.get(d.key).entries());}); 
+                var c = "";
+                var types = commuterModes.get(d.key);
+                for (var k in types){
+                    c += k + " : " + types[k] + "<br/>";
+                }
+                return "Total population in " + d.key + " : " + eval(yvals) + "<br/>" + "Average Distance to Campus: " + Math.floor(d.AVGDIST) + " km"//;});
+                + "<br/>" + c//+ JSON.stringify(commuterModes.get(d.key), null, "<br/>")
+                ;}); 
             // to allow for information to be shown on mouseover - tooltip!
 
       d3.select("input").on("change", change);
@@ -195,4 +207,5 @@ function renderBarchart(category, datatype, county){
 
 $(document).ready(function(){
     renderBarchart("AREA", "COUNT", "ALL");
+    fips = "ALL";
 });
