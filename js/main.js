@@ -4,13 +4,38 @@ var fips = 0;
 
 function getCountyData() {
     d3.csv("data/mit-commuter-data.csv", function(data) {
+        // TODO: use key map instead of rollup
         var countyDataPre = d3.nest().key(function(d){return d.COUNTY;})
         .rollup(function(d){
             return {
                 COUNT:d3.sum(d, function(g){return parseInt(g.COUNT);}),
                 AVGDIST:d3.mean(d, function(g){return parseFloat(g.DIST);}),
                 MINDIST:d3.min(d, function(g){return parseFloat(g.DIST);}),
-                MAXDIST:d3.max(d, function(g){return parseFloat(g.DIST);})
+                MAXDIST:d3.max(d, function(g){return parseFloat(g.DIST);}),
+                WLK: d3.sum(d, function(g) {
+                    if (g.COMMUTE_TYPE === "WLK") {return g.COUNT;}
+                    else {return 0;}
+                }),
+                BIC: d3.sum(d, function(g) {
+                    if (g.COMMUTE_TYPE === "BIC") {return g.COUNT;}
+                    else {return 0;}
+                }),
+                T: d3.sum(d, function(g) {
+                    if (g.COMMUTE_TYPE.slice(-2) === "_T") {return g.COUNT;}
+                    else {return 0;}
+                }),
+                DRV: d3.sum(d, function(g) {
+                    if (g.COMMUTE_TYPE === "DRV") {return g.COUNT;}
+                    else {return 0;}
+                }),
+                CARPOOL: d3.sum(d, function(g) {
+                    if (g.COMMUTE_TYPE === "CARPOOL") {return g.COUNT;}
+                    else {return 0;}
+                }),
+                SHT: d3.sum(d, function(g) {
+                    if (g.COMMUTE_TYPE === "SHT") {return g.COUNT;}
+                    else {return 0;}
+                }),
             };
         })
         .entries(data);
@@ -21,6 +46,12 @@ function getCountyData() {
             countyData[countyDataPre[i].key].MAXDIST = countyDataPre[i].values.MAXDIST;
             countyData[countyDataPre[i].key].MINDIST = countyDataPre[i].values.MINDIST;
             countyData[countyDataPre[i].key].COUNT = countyDataPre[i].values.COUNT;
+            countyData[countyDataPre[i].key].WLK = countyDataPre[i].values.WLK;
+            countyData[countyDataPre[i].key].BIC = countyDataPre[i].values.BIC;
+            countyData[countyDataPre[i].key].T = countyDataPre[i].values.T;
+            countyData[countyDataPre[i].key].DRV = countyDataPre[i].values.DRV;
+            countyData[countyDataPre[i].key].CARPOOL = countyDataPre[i].values.CARPOOL;
+            countyData[countyDataPre[i].key].SHT = countyDataPre[i].values.SHT;
         }
 
         maFips.forEach( function(fips, index, array) {
@@ -32,6 +63,7 @@ function getCountyData() {
                 var count = countyData[fips].COUNT;
 
                 d3.select("svg").append("circle")
+                    .attr("id", "b" + fips)
                     .attr("fill", "#ff9")
                     .transition()
                     .duration(500)
@@ -60,6 +92,41 @@ function getCountyData() {
             d3.selectAll(cid).transition()
                 .duration(500)
                 .style("fill", "#fcc");
+        });
+
+        $(".area").mouseover(function(e) {
+            var mode = $(this).attr("id");
+            maFips.forEach( function(fips, index, array) {
+                var eid = "#" + fips;
+                var path = $(eid)[0];
+                var bbox = path.getBBox();
+
+                if (countyData[fips] != undefined) {
+                    var count = countyData[fips][mode];
+                    var bid = "#b" + fips;
+                    d3.select(bid)
+                        .transition()
+                        .duration(500)
+                        .attr("r", Math.sqrt(count) * 10);
+                }
+            });
+        });
+
+        $(".area").mouseout(function(e) {
+            maFips.forEach( function(fips, index, array) {
+                var eid = "#" + fips;
+                var path = $(eid)[0];
+                var bbox = path.getBBox();
+
+                if (countyData[fips] != undefined) {
+                    var count = countyData[fips].COUNT;
+                    var bid = "#b" + fips;
+                    d3.select(bid)
+                        .transition()
+                        .duration(500)
+                        .attr("r", Math.sqrt(count) * 10);
+                }
+            });
         });
     }); // end of d3.csv
 }
