@@ -222,6 +222,9 @@ $(document).ready(function() {
         $(".county").click( function() {
             var fips = $(this).attr("id");
             if (countyData[fips] === undefined) {
+                dist_hl.transition()
+                    .duration(500)
+                    .style("opacity", 0);
                 return;
             }
             var max_dist = countyData[fips].MAXDIST;
