@@ -70,10 +70,10 @@ function getCountyData() {
                     .attr("cx", bbox.x + bbox.width/2)
                     .attr("cy", bbox.y + bbox.height/2)
                     .attr("r", Math.sqrt(count) * 10)
-                    .attr("stroke", "#666")
-                    .attr("stroke-width", "10")
-                    .attr("fill", "red")
-                    .style("opacity", 0.7);
+                    .style("stroke", "#666")
+                    .style("stroke-width", "10")
+                    .style("fill", "red")
+                    .style("opacity", 0.8);
             }
         });
 
@@ -94,6 +94,12 @@ function getCountyData() {
                 .style("fill", "#fcc");
         });
 
+        // perpare colors
+        var color = d3.scale.category20();
+        var modes_interested = new Array("WLK", "BIC", "T", "DRV", "CARPOOL", "SHT");
+        color.domain(modes_interested);
+
+        // when hover certain mode in area chart, resize map bubbles
         $(".area").mouseover(function(e) {
             var mode = $(this).attr("id");
             maFips.forEach( function(fips, index, array) {
@@ -107,11 +113,13 @@ function getCountyData() {
                     d3.select(bid)
                         .transition()
                         .duration(500)
-                        .attr("r", Math.sqrt(count) * 10);
+                        .attr("r", Math.sqrt(count) * 10)
+                        .style("fill", function(d) { return color(mode);});
                 }
             });
         });
 
+        // when mouse out of any area, resize map bubbles to total count
         $(".area").mouseout(function(e) {
             maFips.forEach( function(fips, index, array) {
                 var eid = "#" + fips;
@@ -124,7 +132,8 @@ function getCountyData() {
                     d3.select(bid)
                         .transition()
                         .duration(500)
-                        .attr("r", Math.sqrt(count) * 10);
+                        .attr("r", Math.sqrt(count) * 10)
+                        .style("fill", "red");
                 }
             });
         });

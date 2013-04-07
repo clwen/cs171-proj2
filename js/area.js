@@ -85,7 +85,6 @@ $(document).ready(function() {
         });
 
         var modes_interested = new Array("WLK", "BIC", "T", "DRV", "CARPOOL", "SHT");
-        // color.domain(d3.keys(data[0]).filter(function(key) { return key === "COMMUTE_TYPE"; }));
         color.domain(modes_interested);
 
         var data_by_dist = d3.nest()
