@@ -78,7 +78,8 @@ function getCountyData() {
         });
 
         var lastHighLighted;
-        $(".county").click( function() {
+        $(".county").click( function(e) {
+            e.stopPropagation();
             var fips = $(this).attr("id");
             var cid = ".c" + fips;
             // clear last highlighted county
@@ -92,6 +93,15 @@ function getCountyData() {
             d3.selectAll(cid).transition()
                 .duration(500)
                 .style("fill", "#fcc");
+        });
+
+        // while click on background, remove county highlighting
+        $("body").click(function() {
+            if (lastHighLighted !== undefined) {
+                d3.selectAll(lastHighLighted).transition()
+                    .duration(500)
+                    .style("fill", "#ff9");
+            }
         });
 
         // perpare colors

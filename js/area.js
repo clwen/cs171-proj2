@@ -169,7 +169,7 @@ $(document).ready(function() {
             .attr("id", function(d) {return d.name;})
             .attr("class", "area")
             .attr("d", function(d) { return area(d.values); })
-            .style("fill", function(d) { return color(d.name); })
+            .style("fill", function(d) { return color(d.name); });
 
         svg.append("g")
             .attr("class", "x axis")
@@ -203,7 +203,7 @@ $(document).ready(function() {
 
             div.text(mode)
                 .style("left", (e.pageX - 34) + "px")
-                .style("up", (e.pageY - 12) + "px")
+                .style("up", (e.pageY - 12) + "px");
         });
 
         $(".area").mouseout(function() {
