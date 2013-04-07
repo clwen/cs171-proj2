@@ -44,19 +44,18 @@ function getCountyData() {
         var lastHighLighted;
         $(".county").click( function() {
             var fips = $(this).attr("id");
-            console.log(fips);
-            var eid = "#" + fips;
+            var cid = ".c" + fips;
             // clear last highlighted county
-            $(lastHighLighted).css("fill", "#ff9");
-            // d3.select(lastHighLighted).transition()
-            //     .duration(500)
-            //     .style("fill", "#ff9");
+            if (lastHighLighted !== undefined) {
+                d3.selectAll(lastHighLighted).transition()
+                    .duration(500)
+                    .style("fill", "#ff9");
+            }
             // highlight current county
-            $(eid).css("fill", "#fcc");
-            lastHighLighted = eid;
-            // d3.select(eid).transition()
-            //     .duration(500)
-            //     .style("fill", "#fcc");
+            lastHighLighted = cid;
+            d3.selectAll(cid).transition()
+                .duration(500)
+                .style("fill", "#fcc");
         });
     }); // end of d3.csv
 }
