@@ -187,7 +187,7 @@ $(document).ready(function() {
             .attr("class", "y axis")
             .call(yAxis);
 
-        var div = d3.select("body").append("div")
+        var div = d3.select("#area-chart").append("div")
             .attr("class", "area-tooltip")
             .style("opacity", 0);
 
