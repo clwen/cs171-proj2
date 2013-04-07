@@ -214,7 +214,10 @@ $(document).ready(function() {
             .style("opacity", 0);
 
         $(".county").click( function() {
-            fips = $(this).attr("id");
+            var fips = $(this).attr("id");
+            if (countyData[fips] === undefined) {
+                return;
+            }
             var max_dist = countyData[fips].MAXDIST;
             if (max_dist > 80) {max_dist = 80;}
             var min_dist = countyData[fips].MINDIST;
