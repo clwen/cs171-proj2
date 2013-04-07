@@ -32,12 +32,16 @@ function getCountyData() {
                 var count = countyData[fips].COUNT;
 
                 d3.select("svg").append("circle")
+                    .attr("fill", "#ff9")
+                    .transition()
+                    .duration(500)
                     .attr("cx", bbox.x + bbox.width/2)
                     .attr("cy", bbox.y + bbox.height/2)
                     .attr("r", Math.sqrt(count) * 10)
-                    .attr("stroke", "black")
+                    .attr("stroke", "#666")
                     .attr("stroke-width", "10")
                     .attr("fill", "red")
+                    .style("opacity", 0.7);
             }
         });
 
