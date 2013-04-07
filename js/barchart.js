@@ -105,7 +105,6 @@ function renderBarchart(category, datatype, county){
             commuterModes = commuterData.get(county);
         }
 
-        console.log(commuterModes);
         commuterModes.forEach(function(e){
             var els = this.get(e);
             for(var i in els){
@@ -123,7 +122,6 @@ function renderBarchart(category, datatype, county){
                 }
             }
         });
-        //console.log(commuterModes);
 
         var yvals = "d.values";
 

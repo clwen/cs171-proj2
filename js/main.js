@@ -43,7 +43,6 @@ function getCountyData() {
 
         $(".county").click( function() {
             fips = $(this).attr("id");
-            console.log(fips);
         });
     }); // end of d3.csv
 }

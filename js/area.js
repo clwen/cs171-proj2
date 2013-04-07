@@ -215,7 +215,6 @@ $(document).ready(function() {
 
         $(".county").click( function() {
             fips = $(this).attr("id");
-            console.log(fips);
             var max_dist = countyData[fips].MAXDIST;
             if (max_dist > 80) {max_dist = 80;}
             var min_dist = countyData[fips].MINDIST;
@@ -227,7 +226,6 @@ $(document).ready(function() {
             var w = max_x - min_x;
             if (w === 0) {w = 20;}
             var h = max_y - min_y;
-            console.log(min_x, min_y, w, h);
             dist_hl.transition()
                 .duration(500)
                 .attr("x", min_x)
