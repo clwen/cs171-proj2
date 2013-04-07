@@ -218,7 +218,9 @@ $(document).ready(function() {
             .attr("class", "dist-hl")
             .style("opacity", 0);
 
-        $(".county").click( function() {
+        // while county clicked, highlight distance range in area chart
+        $(".county").click( function(e) {
+            e.stopPropagation();
             var fips = $(this).attr("id");
             if (countyData[fips] === undefined) {
                 dist_hl.transition()
@@ -247,6 +249,13 @@ $(document).ready(function() {
                 .style("opacity", "0.3");
 
                 renderBarchart($('input[name=category]:checked').val(), $('input[name=datatype]:checked').val(), fips);
+        });
+
+        // clear highlight rect while background clicked
+        $("body").click( function() {
+            dist_hl.transition()
+                .duration(500)
+                .style("opacity", 0);
         });
     }); // end of d3.csv
 }); // end of document ready
