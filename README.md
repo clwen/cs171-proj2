@@ -1,7 +1,7 @@
 ### CS171 Project 2: Commuting Modalities at MIT
 
 #### About
-* Authors: Chunglin Wen, Amy Zhao (sorted by lastname)
+* Authors: Chunglin Wen, Amy Yu (sorted by lastname)
 * Please see `https://github.com/clwen/cs171-proj2` for a github flavored markdown version of the `README`
 
 ---
