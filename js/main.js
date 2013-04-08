@@ -61,7 +61,7 @@ function getCountyData() {
             var path = $(eid)[0];
             var bbox = path.getBBox();
 
-            if (countyData[fips] != undefined) {
+            if (countyData[fips] !== undefined) {
                 var count = countyData[fips].COUNT;
 
                 d3.select("svg").append("circle")
@@ -84,6 +84,9 @@ function getCountyData() {
             e.stopPropagation();
             fips = $(this).attr("id");
             var cid = ".c" + fips;
+            if (countyData[fips] === undefined) {
+                alert("No data points in this county");
+            }
             // clear last highlighted county
             if (lastHighLighted !== undefined) {
                 d3.selectAll(lastHighLighted).transition()
@@ -106,7 +109,6 @@ function getCountyData() {
             }
             fips = "ALL";
             renderBarchart(cat, type, fips);
-
         });
 
         // perpare colors
