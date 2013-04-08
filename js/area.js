@@ -1,7 +1,7 @@
 $(document).ready(function() {
     var margin = {top: 20, right: 20, bottom: 30, left: 50},
-        width = 480 - margin.left - margin.right,
-        height = 250 - margin.top - margin.bottom;
+        width = 528 - margin.left - margin.right,
+        height = 275 - margin.top - margin.bottom;
 
     var parseDate = d3.time.format("%y-%b-%d").parse,
         formatPercent = d3.format(".0%");
@@ -85,7 +85,6 @@ $(document).ready(function() {
         });
 
         var modes_interested = new Array("WLK", "BIC", "T", "DRV", "CARPOOL", "SHT");
-        // color.domain(d3.keys(data[0]).filter(function(key) { return key === "COMMUTE_TYPE"; }));
         color.domain(modes_interested);
 
         var data_by_dist = d3.nest()
@@ -170,18 +169,24 @@ $(document).ready(function() {
             .attr("id", function(d) {return d.name;})
             .attr("class", "area")
             .attr("d", function(d) { return area(d.values); })
-            .style("fill", function(d) { return color(d.name); })
+            .style("fill", function(d) { return color(d.name); });
 
         svg.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(0," + height + ")")
-            .call(xAxis);
+            .call(xAxis)
+            .append("text")
+            .attr("class", "label")
+            .attr("x", width)
+            .attr("y", "-6")
+            .style("text-anchor", "end")
+            .text("Distance (km)");
 
         svg.append("g")
             .attr("class", "y axis")
             .call(yAxis);
 
-        var div = d3.select("body").append("div")
+        var div = d3.select("#area-chart").append("div")
             .attr("class", "area-tooltip")
             .style("opacity", 0);
 
@@ -198,7 +203,7 @@ $(document).ready(function() {
 
             div.text(mode)
                 .style("left", (e.pageX - 34) + "px")
-                .style("up", (e.pageY - 12) + "px")
+                .style("up", (e.pageY - 12) + "px");
         });
 
         $(".area").mouseout(function() {
@@ -213,9 +218,16 @@ $(document).ready(function() {
             .attr("class", "dist-hl")
             .style("opacity", 0);
 
-        $(".county").click( function() {
-            fips = $(this).attr("id");
-            console.log(fips);
+        // while county clicked, highlight distance range in area chart
+        $(".county").click( function(e) {
+            e.stopPropagation();
+            var fips = $(this).attr("id");
+            if (countyData[fips] === undefined) {
+                dist_hl.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+                return;
+            }
             var max_dist = countyData[fips].MAXDIST;
             if (max_dist > 80) {max_dist = 80;}
             var min_dist = countyData[fips].MINDIST;
@@ -227,7 +239,6 @@ $(document).ready(function() {
             var w = max_x - min_x;
             if (w === 0) {w = 20;}
             var h = max_y - min_y;
-            console.log(min_x, min_y, w, h);
             dist_hl.transition()
                 .duration(500)
                 .attr("x", min_x)
@@ -238,6 +249,13 @@ $(document).ready(function() {
                 .style("opacity", "0.3");
 
                 renderBarchart($('input[name=category]:checked').val(), $('input[name=datatype]:checked').val(), fips);
+        });
+
+        // clear highlight rect while background clicked
+        $("body").click( function() {
+            dist_hl.transition()
+                .duration(500)
+                .style("opacity", 0);
         });
     }); // end of d3.csv
 }); // end of document ready
