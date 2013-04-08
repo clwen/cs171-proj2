@@ -95,13 +95,16 @@ function getCountyData() {
                 .style("fill", "#fcc");
         });
 
-        // while click on background, remove county highlighting
-        $("body").click(function() {
+        // while click on background outside of the map, remove county highlighting
+        $(".maps").click(function() {
             if (lastHighLighted !== undefined) {
                 d3.selectAll(lastHighLighted).transition()
                     .duration(500)
                     .style("fill", "#ff9");
             }
+            renderBarchart("AREA", "COUNT", "ALL");
+            fips = "ALL";
+            
         });
 
         // perpare colors
