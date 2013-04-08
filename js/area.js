@@ -237,7 +237,13 @@ $(document).ready(function() {
             var min_y = y(1);
             var max_y = y(0);
             var w = max_x - min_x;
-            if (w === 0) {w = 20;}
+            if (w === 0) {
+                // if it's already to the end, back a bit and set w to 20
+                if (max_dist === 80) {
+                    min_x -= 20;
+                }
+                w = 20;
+            }
             var h = max_y - min_y;
             dist_hl.transition()
                 .duration(500)
