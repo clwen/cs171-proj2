@@ -148,7 +148,7 @@ function getCountyData() {
                         .transition()
                         .duration(500)
                         .attr("r", Math.sqrt(count) * bubbleEnlarge)
-                        .style("fill", "red");
+                        .style("fill", "DarkRed");
                 }
             });
         });
