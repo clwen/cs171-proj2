@@ -180,6 +180,9 @@ function renderBarchart(category, datatype, county){
             // to allow for information to be shown on mouseover - tooltip!
 
       d3.select("input").on("change", change);
+      // if($('input[name="sort"]:checked').length > 0){
+      //   console.log("checked");
+      // }
 
       function change() {
         var x0 = x.domain(nestedData.sort(this.checked
@@ -216,8 +219,11 @@ function renderBarchart(category, datatype, county){
 // }
 
 $(document).ready(function(){
-    renderBarchart("AREA", "COUNT", "ALL");
     fips = "ALL";
+    cat = "AREA";
+    type = "COUNT";
+    renderBarchart(cat, type, fips);
+    
     // scrolling();
 
 });

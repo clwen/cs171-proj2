@@ -1,6 +1,7 @@
 var maFips = _.range(25001, 25028, 2);
 var cData = 0;
 var fips = 0;
+var cat, type;
 
 function getCountyData() {
     d3.csv("data/mit-commuter-data.csv", function(data) {
@@ -64,7 +65,7 @@ function getCountyData() {
 
                 d3.select("svg").append("circle")
                     .attr("id", "b" + fips)
-                    .attr("fill", "#ff9")
+                    .attr("fill", "grey")
                     .transition()
                     .duration(500)
                     .attr("cx", bbox.x + bbox.width/2)
@@ -72,7 +73,7 @@ function getCountyData() {
                     .attr("r", Math.sqrt(count) * 10)
                     .style("stroke", "#666")
                     .style("stroke-width", "10")
-                    .style("fill", "red")
+                    .style("fill", "DarkRed")
                     .style("opacity", 0.8);
             }
         });
@@ -80,19 +81,19 @@ function getCountyData() {
         var lastHighLighted;
         $(".county").click( function(e) {
             e.stopPropagation();
-            var fips = $(this).attr("id");
+            fips = $(this).attr("id");
             var cid = ".c" + fips;
             // clear last highlighted county
             if (lastHighLighted !== undefined) {
                 d3.selectAll(lastHighLighted).transition()
                     .duration(500)
-                    .style("fill", "#ff9");
+                    .style("fill", "grey");
             }
             // highlight current county
             lastHighLighted = cid;
             d3.selectAll(cid).transition()
                 .duration(500)
-                .style("fill", "#fcc");
+                .style("fill", "#ff9");
         });
 
         // while click on background outside of the map, remove county highlighting
@@ -100,11 +101,11 @@ function getCountyData() {
             if (lastHighLighted !== undefined) {
                 d3.selectAll(lastHighLighted).transition()
                     .duration(500)
-                    .style("fill", "#ff9");
+                    .style("fill", "grey");
             }
-            renderBarchart("AREA", "COUNT", "ALL");
             fips = "ALL";
-            
+            renderBarchart(cat, type, fips);
+
         });
 
         // perpare colors
@@ -146,7 +147,7 @@ function getCountyData() {
                         .transition()
                         .duration(500)
                         .attr("r", Math.sqrt(count) * 10)
-                        .style("fill", "red");
+                        .style("fill", "DarkRed");
                 }
             });
         });
