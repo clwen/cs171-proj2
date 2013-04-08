@@ -85,7 +85,8 @@ function getCountyData() {
             fips = $(this).attr("id");
             var cid = ".c" + fips;
             if (countyData[fips] === undefined) {
-                alert("No data points in this county");
+                $("#county-no-data").show();
+                setTimeout("$('#county-no-data').hide();", 2000);
             }
             // clear last highlighted county
             if (lastHighLighted !== undefined) {
@@ -155,6 +156,8 @@ function getCountyData() {
             });
         });
     }); // end of d3.csv
+
+    $("#county-no-data").hide();
 }
 
 $(document).ready( function() {
