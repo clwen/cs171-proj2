@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CS.171 Project 2</title>
+    <title>Commuting Modalities at MIT</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/area.css">
@@ -18,17 +18,17 @@
 
   </head>
   <body>
-    <div class="container-fluid">
+    <div class="container-fluid" id="dashboard">
       <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
               <div class="container-fluid">
                 <a class="brand" href="#">MIT Commuters</a>
                   <ul class="nav">
-                    <li class="active"><a href="#">Dashboard</a></li>
+                    <li><a href="#dashboard">Dashboard</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#data">Data</a></li>
                     <li><a href="#guide">Guide</a></li>
-                    <li><a href="#examples">Examples</a></li>
+                    <li><a href="#examples">Demo</a></li>
                   </ul>
               </div>
             </div>
@@ -122,6 +122,9 @@
         <p>
           Commuting is an activity that almost everyone participates in, and is a central tenet to our everyday lives. The choices that we make as commuters have a significant broader impact on the wider community, economy, and environment. As individuals, we have a limited view of our commuting footprint - however, large organizations (such as educational institutions and companies) have the potential to understand commuter behavior from a larger perspective and implement policies that may influence and incentivize individual commuter behaviors. Given the dataset that we have about the MIT community, we see the opportunity to use MIT as a case study for how to describe, visualize, and understand individual commuters within the context of a large structured institution. The insights that are gained from this visualization may also have broader implications with respect to urban planning, organizational budgeting, and political policy. 
         </p>
+        <p>
+          Visualizations and webpage by: Chunglin Wen and Amy (Zhao) Yu
+        </p>
         <a id="data"><legend>Data</legend></a> 
         <p>
           The primary data source for this visualization is the MIT Commuter Common dataset created by Ira Winder from the Changing Places group at MIT Media Lab. This data is contains demographic and survey data for 2012 from the entire MIT community related to commuting choices and geographic location. Due to data privacy concerns, the data is provided at an aggregated level and is not available at level of individual granularity. 
@@ -129,13 +132,15 @@
         <a id="guide"><legend>Guide</legend></a>
         <dl class="dl-horizontal">
           <dt>Map Overview</dt>
-          <dd>The map above shows the state of Massachusetts divided into county areas. The bubble overlay encodes population data - when you hover over a specific commuting method within the stacked area chart, the bubbles will automatically resize proportionally to allow for visual comparison of various MIT commuter populations.</dd>
+          <dd>The map above shows the state of Massachusetts divided into county areas. The bubble overlay encodes population data - when you hover over a specific commuting method within the stacked area chart, the bubbles are linked to the interaction and will automatically resize proportionally to allow for visual comparison of various MIT commuter populations.</dd>
           <dt>Demographic Details</dt>
-          <dd>The bar chart shows the demographic distribution and </dd>
+          <dd>The bar chart shows the demographic distribution of the population being analyzed. Users may select a specific county area within Massachusetts by clicking on the county of interest to update the bar chart to show the demographic breakdown filtered by a single county. Hover over the bars within the barchar to expose details on demand for one specific demographic group. </dd>
           <dt>Commuter Modes</dt>
-          <dd>Various commuter modes based on distance from campus.</dd>
+          <dd>The stacked area chart shows various commuter modes based on distance from campus. Hover over a given commute mode to highlight the corresponding area and update the bubble overlay and show the linkage between geographic distribution and commute mode. When a specific county is highlighted on the Massachusetts map, the relevant distance interval is highlighted on the stacked area chart to highlight the relevant distribution of commute modes.</dd>
         </dl>
-        <a id="examples"><legend>Examples</legend></a>
+        <a id="examples"><legend>Demo</legend></a>
+        <iframe width="560" height="315" src="http://www.youtube.com/embed/IJNR2EpS0jw" frameborder="0" allowfullscreen></iframe>
+
       </div>
     </div>
   </div>

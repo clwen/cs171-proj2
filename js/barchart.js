@@ -206,17 +206,17 @@ function renderBarchart(category, datatype, county){
     });
 }
 
-// function scrolling() {
-//     $('ul.nav a').bind('click',function(event){
-//     var anchor = $(this);
+function scrolling() {
+    $('ul.nav a').bind('click',function(event){
+    var anchor = $(this);
 
-//     $('html, body').stop().animate({
-//         scrollTop: $(anchor.attr('href')).offset().top
-//     }, 1000);
+    $('html, body').stop().animate({
+        scrollTop: $(anchor.attr('href')).offset().top
+    }, 1000);
     
-//     event.preventDefault();
-//     });
-// }
+    event.preventDefault();
+    });
+}
 
 $(document).ready(function(){
     fips = "ALL";
@@ -224,6 +224,6 @@ $(document).ready(function(){
     type = "COUNT";
     renderBarchart(cat, type, fips);
     
-    // scrolling();
+    scrolling();
 
 });
