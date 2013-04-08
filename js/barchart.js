@@ -65,7 +65,7 @@ function renderBarchart(category, datatype, county){
         .attr("height", height + margin.top + margin.bottom)
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    d3.csv("http://localhost:8000/data/mit-commuter-data.csv", function(data){
+    d3.csv("data/mit-commuter-data.csv", function(data){
         var command = "d3.nest()";
         if(county!="ALL"){
             command += ".key(function(d){return d.COUNTY;})";
