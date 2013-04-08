@@ -36,6 +36,7 @@
       <div class="row-fluid">
       <div class="span12">
         <div class="maps span7">
+          <b>Hello World</b>
           <!-- width="892.6" height="545.8"  -->
           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="745" height="455" viewBox="-11101,-5482 29756,18193">
           <g class="county c25001" id="25001" title="Barnstable">
@@ -96,7 +97,7 @@
         <div class="span5">
           <div class="row-fluid">
             <div class="span12">
-              <!--Sidebar content-->
+              <b>Hello Barchart</b>
               <input type="checkbox" name = "sort"> Sort values
               <form onclick="cat = $('input[name=category]:checked').val(); type = $('input[name=datatype]:checked').val();
               renderBarchart(cat, type, fips);">
@@ -119,6 +120,7 @@
 
         <div class="row-fluid">
           <div class="span12">
+            <b>Hello Areachart</b>
             <div id="area-chart"></div>
           </div>
         </div>
@@ -131,7 +133,7 @@
         </p>
         <a id="data"><legend>Data</legend></a> 
         <p>
-          The primary data source for this visualization is the MIT Commuter Common dataset created by Ira Winder from the Changing Places group at MIT Media Lab. This data is contains demographic and survey data for 2012 from the entire MIT community related to commuting choices and geographic location. Due to data privacy concerns, the data is provided at an aggregated level and is not available at level of individual granularity. 
+          The primary data source for this visualization is the MIT Commuter Common dataset created by Ira Winder from the Changing Places group at MIT Media Lab. This data is contains demographic and survey data for 2012 from the entire MIT community related to commuting choices and geographic location. Due to data privacy concerns, the data is provided at an aggregated level and is not available at level of individual granularity.
         </p>
         <a id="guide"><legend>Guide</legend></a>
         <dl class="dl-horizontal">
@@ -141,6 +143,49 @@
           <dd>The bar chart shows the demographic distribution of the population being analyzed. Users may select a specific county area within Massachusetts by clicking on the county of interest to update the bar chart to show the demographic breakdown filtered by a single county. Hover over the bars within the barchar to expose details on demand for one specific demographic group. </dd>
           <dt>Commuter Modes</dt>
           <dd>The stacked area chart shows various commuter modes based on distance from campus. Hover over a given commute mode to highlight the corresponding area and update the bubble overlay and show the linkage between geographic distribution and commute mode. When a specific county is highlighted on the Massachusetts map, the relevant distance interval is highlighted on the stacked area chart to highlight the relevant distribution of commute modes.</dd>
+        </dl>
+        <a id="datakey"><legend>Area and Affiliation Codes</legend></a>
+        <b>Area Codes</b>
+        <dl class="dl-horizontal">
+          <dt>U</dt>
+          <dd>Undergraduate Students</dd>
+          <dt>G</dt>
+          <dd>Graduate Students</dd>
+          <dt>F</dt>
+          <dd>Faculty</dd>
+          <dt>A</dt>
+          <dd>Administrators</dd>
+          <dt>AS</dt>
+          <dd>Academic Staff</dd>
+          <dt>SS</dt>
+          <dd>Support Staff</dd>
+        </dl>
+        <b>Affiliation Codes</b>
+        <dl class="dl-horizontal">
+          <dt>DF</dt>
+          <dd>Department of Facilities</dd>
+          <dt>ENG</dt>
+          <dd>School of Engineering</dd>
+          <dt>HAS</dt>
+          <dd>School of Humanities</dd>
+          <dt>IST</dt>
+          <dd>IS &amp T</dd>
+          <dt>LIB</dt>
+          <dd>Libraries</dd>
+          <dt>CRP</dt>
+          <dd>MIT Corporation</dd>
+          <dt>SAP</dt>
+          <dd>School of Architecture</dd>
+          <dt>SCI</dt>
+          <dd>School of Science</dd>
+          <dt>SSM</dt>
+          <dd>Sloan School of Management</dd>
+          <dt>UNDEC</dt>
+          <dd>Undeclared</dd>
+          <dt>SLD</dt>
+          <dd>Senior Leadership</dd>
+          <dt>OTH</dt>
+          <dd>Other</dd>
         </dl>
         <a id="examples"><legend>Demo</legend></a>
         <iframe width="560" height="315" src="http://www.youtube.com/embed/IJNR2EpS0jw" frameborder="0" allowfullscreen></iframe>
