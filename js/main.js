@@ -1,6 +1,7 @@
 var maFips = _.range(25001, 25028, 2);
 var cData = 0;
 var fips = 0;
+var bubbleEnlarge = 15;
 var cat, type;
 
 function getCountyData() {
@@ -70,7 +71,7 @@ function getCountyData() {
                     .duration(500)
                     .attr("cx", bbox.x + bbox.width/2)
                     .attr("cy", bbox.y + bbox.height/2)
-                    .attr("r", Math.sqrt(count) * 10)
+                    .attr("r", Math.sqrt(count) * bubbleEnlarge)
                     .style("stroke", "#666")
                     .style("stroke-width", "10")
                     .style("fill", "DarkRed")
@@ -127,7 +128,7 @@ function getCountyData() {
                     d3.select(bid)
                         .transition()
                         .duration(500)
-                        .attr("r", Math.sqrt(count) * 10)
+                        .attr("r", Math.sqrt(count) * bubbleEnlarge)
                         .style("fill", function(d) { return color(mode);});
                 }
             });
@@ -146,8 +147,8 @@ function getCountyData() {
                     d3.select(bid)
                         .transition()
                         .duration(500)
-                        .attr("r", Math.sqrt(count) * 10)
-                        .style("fill", "DarkRed");
+                        .attr("r", Math.sqrt(count) * bubbleEnlarge)
+                        .style("fill", "red");
                 }
             });
         });
