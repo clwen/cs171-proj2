@@ -30,7 +30,7 @@ function renderBarchart(category, datatype, county){
     d3.select("#barchart").remove(); //perhaps add a smoother transition between data
     var margin = {top: 20, right: 20, bottom: 30, left: 40},
         width = 480 - margin.left - margin.right,
-        height = 250 - margin.top - margin.bottom;
+        height = 350 - margin.top - margin.bottom;
 
     var formatPercent = d3.format(".0%");
 

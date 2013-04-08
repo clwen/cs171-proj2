@@ -96,36 +96,23 @@
         <div class="span5">
           <div class="row-fluid">
             <div class="span12">
-              <div id = "tooltip" class = "invisible"></div>
-              <div id = "chartarea"></div>
+              <!--Sidebar content-->
+              <input type="checkbox" name = "sort"> Sort values
+              <form onclick="cat = $('input[name=category]:checked').val(); type = $('input[name=datatype]:checked').val();
+              renderBarchart(cat, type, fips);">
+              <b> Data Type </b>
+                <input type="radio" name="datatype" id="percent" value="PERCENT"> %
+                <input type="radio" name="datatype" id="people" value="COUNT" checked>#
+              <b> Categories </b>
+                <input type="radio" name="category" id="area" value="AREA" checked>Area
+                <input type="radio" name="category" id="affiliation" value="AFFILIATION">Affiliation
+              </form>
             </div>
           </div>
           <div class="row-fluid">
-            <div class="span3">
-              <h4>Options</h4>
-              <!--Sidebar content-->
-              <label><input type="checkbox" name = "sort"> Sort values</label>
-              <form onclick="cat = $('input[name=category]:checked').val(); type = $('input[name=datatype]:checked').val();
-              renderBarchart(cat, type, fips);">
-                <h5>Data Type</h5>
-                <label class="radio">
-                  <input type="radio" name="datatype" id="percent" value="PERCENT">
-                  Percentages
-                </label>
-                <label class="radio">
-                  <input type="radio" name="datatype" id="people" value="COUNT" checked>
-                  Total Number of People
-                </label>
-                <h5>Categories</h5>
-                <label class="radio">
-                  <input type="radio" name="category" id="area" value="AREA" checked>
-                  Area
-                </label>
-                <label class="radio">
-                  <input type="radio" name="category" id="affiliation" value="AFFILIATION">
-                  Affiliation
-                </label>
-              </form>
+            <div class="span12">
+              <div id = "tooltip" class = "invisible"></div>
+              <div id = "chartarea"></div>
             </div>
           </div>
         </div>

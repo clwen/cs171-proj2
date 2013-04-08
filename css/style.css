@@ -2,6 +2,10 @@ body {
   background-color: #0cf;
 }
 
+h5 .radio {
+    display: inline;
+}
+
 .maps path {
   stroke: black;
   stroke-width: 10;
