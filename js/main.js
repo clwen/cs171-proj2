@@ -117,7 +117,7 @@ function getCountyData() {
         color.domain(modes_interested);
 
         // when hover certain mode in area chart, resize map bubbles
-        $(".area").mouseover(function(e) {
+        $(".area").mousemove(function(e) {
             var mode = $(this).attr("id");
             maFips.forEach( function(fips, index, array) {
                 var eid = "#" + fips;
