@@ -36,9 +36,9 @@ There are mainly three parts of the visualization: map, bar chart and area chart
 #### Libraries used
 
 * [D3](http://d3js.org/)
-    * Use hosted version `http://d3js.org/d3.v3.min.js`
+    * Use local version under `js`
 * [jQuery](http://jquery.com/)
-    * Use hosted version `http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js`
+    * Use local version under `js`
 * [Bootstrap](http://twitter.github.io/bootstrap/)
     * Use local version under `js` and `css` directories
 * [Underscore](http://underscorejs.org/)
