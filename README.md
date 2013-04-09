@@ -50,3 +50,10 @@ There are mainly three parts of the visualization: map, bar chart and area chart
 
 `data/mit-commuter-data.csv` is used in the code. It is imported by `d3.csv` method.
 
+---
+
+#### Gotchas
+
+* If hovering commuting methods in area chart doesn't update the bubbles on the map, please refresh the browser (also make sure it clears the Javascript and CSS cache) several times 
+    * (`Shift + Command + R` if on a MAC OS) 
+
