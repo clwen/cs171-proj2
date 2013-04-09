@@ -221,7 +221,8 @@ $(document).ready(function() {
         // while county clicked, highlight distance range in area chart
         $(".county").click( function(e) {
             e.stopPropagation();
-            var fips = $(this).attr("id");
+            var county = $(this).attr("id");
+            var fips = countyToFips[county];
             if (countyData[fips] === undefined) {
                 dist_hl.transition()
                     .duration(500)

@@ -3,6 +3,38 @@ var cData = 0;
 var fips = 0;
 var bubbleEnlarge = 15;
 var cat, type;
+var countyToFips = {
+    "barnstable": 25001,
+    "berkshire": 25003,
+    "bristol": 25005,
+    "dukes": 25007,
+    "essex": 25009,
+    "franklin": 25011,
+    "hampden": 25013,
+    "hampshire": 25015,
+    "middlesex": 25017,
+    "nantucket": 25019,
+    "norfolk": 25021,
+    "plymouth": 25023,
+    "suffolk": 25025,
+    "worcester": 25027,
+};
+var fipsToCounty = {
+    25001: "barnstable",
+    25003: "berkshire",
+    25005: "bristol",
+    25007: "dukes",
+    25009: "essex",
+    25011: "franklin",
+    25013: "hampden",
+    25015: "hampshire",
+    25017: "middlesex",
+    25019: "nantucket",
+    25021: "norfolk",
+    25023: "plymouth",
+    25025: "suffolk",
+    25027: "worcester",
+};
 
 function getCountyData() {
     d3.csv("data/mit-commuter-data.csv", function(data) {
@@ -57,7 +89,8 @@ function getCountyData() {
         }
 
         maFips.forEach( function(fips, index, array) {
-            var eid = "#" + fips;
+            var county = fipsToCounty[fips];
+            var eid = "#" + county;
             var path = $(eid)[0];
             var bbox = path.getBBox();
 
@@ -82,7 +115,8 @@ function getCountyData() {
         var lastHighLighted;
         $(".county").click( function(e) {
             e.stopPropagation();
-            fips = $(this).attr("id");
+            var county = $(this).attr("id");
+            fips = countyToFips[county];
             var cid = ".c" + fips;
             if (countyData[fips] === undefined) {
                 $("#county-no-data").show();
@@ -121,7 +155,8 @@ function getCountyData() {
         $(".area").mousemove(function(e) {
             var mode = $(this).attr("id");
             maFips.forEach( function(fips, index, array) {
-                var eid = "#" + fips;
+                var county = fipsToCounty[fips];
+                var eid = "#" + county;
                 var path = $(eid)[0];
                 var bbox = path.getBBox();
 
@@ -140,7 +175,8 @@ function getCountyData() {
         // when mouse out of any area, resize map bubbles to total count
         $(".area").mouseout(function(e) {
             maFips.forEach( function(fips, index, array) {
-                var eid = "#" + fips;
+                var county = fipsToCounty[fips];
+                var eid = "#" + county;
                 var path = $(eid)[0];
                 var bbox = path.getBBox();
 
