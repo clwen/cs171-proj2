@@ -4,7 +4,7 @@ body {
   padding-top: 20px;
 }
 
-h5 .radio {
+h5 .radio form{
     display: inline;
 }
 
